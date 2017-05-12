@@ -4,12 +4,13 @@ var app = express();
 var _ = require('lodash');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
+var stockRouter = require('express').Router();
 var PORT = 1775;
 
 
 mongoose.connect('mongodb://pete:kissmyass2006@ds133311.mlab.com:33311/newlion')
 
-var stock = require('./stocks');
+var stock = require('../models/stocks');
 
 app.use(morgan('dev'));
 app.use(express.static('clients'));
@@ -25,4 +26,6 @@ app.use(function(err, req, res, next) {
 })
 
 
-app.listen(PORT);
+app.listen(PORT, function () {
+  console.log(`app listening on port ${PORT}`);
+});

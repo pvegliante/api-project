@@ -19,20 +19,19 @@ stockRouter.get('/:id', function(req, res) {
   res.json(stock || {});
 });
 
-stockRouter.post('/', function(req, res) {
+stockRouter.post('/stocks', function(req, res) {
   const stockObj = new Stock({
     name: req.body.name,
     value: req.body.value,
-    total: req.body.total,
-    date: req.body.date
+    total: req.body.total
   });
 
   stockObj.save((err) => {
     if (err) {
-      rfes.send(err);
+      res.send(err);
     }
 
-    res.json({message: 'stack created'});
+    res.json({message: 'stock created'});
   });
 });
 
