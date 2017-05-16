@@ -1,39 +1,45 @@
 var stockTemplate = '<h2><%= name %></h2>' +
-'<h2><%= value %></h2>' +
-'<h2><%= total %></h2>' +
-'<h2><%=date %></h2>';
+'<h3><%= total %></h3>'+
+'<h5><%= value %></h5>'+
+'<h5><%= change %></h5>';
 
 var stocks = [];
 
 var makeTemplate = function(data) {
-  var li = document.qureyElement('li');
+  var li = document.createElement('li');
   var stockList = document.querySelector('.stock-list');
   var compiled = _.template(stockTemplate);
-  var stockHTML = compiled(data);
+  var stockHtml = compiled(data);
   li.innerHTML = stockHtml;
   stockList.insertBefore(li, stockList.firstChild);
 }
 
 var updateStockList = function() {
-  var stockData = stocks[stock.length-1];
+  var stockData = stocks[stocks.length-1];
+  // console.log(stockData);
   makeTemplate(stockData);
 }
 
-var get Values = function() {
+var getValues = function() {
   var name = document.querySelector('input[name=stock-name]').value;
   var value = document.querySelector('input[name=stock-value]').value;
   var total = document.querySelector('input[name=stock-total]').value;
-  var date = document.querySelector('input[name=stock-date]').value;
-
+  var stockChange = document.querySelector('input[name=stock-change]').value;
+  var change = document.querySelector('select');
+  change = change.options[change.selectedIndex].value;
+  console.log(change);
   document.querySelector('input[name=stock-name]').value = '';
   document.querySelector('input[name=stock-value]').value = '';
-  document.querySelector('input[type=number]').value = '';
+  document.querySelector('input[name=stock-total]').value = '';
+  document.querySelector('input[name=stock-change]').value = '';
+    // document.querySelector('input[type=number]').value = '';
 
   return {
     name: name,
     value: value,
     total: total,
-    date: date
+    change: change,
+    stockChange: stockChange
   };
 };
 
@@ -45,11 +51,13 @@ var makeStockList = function() {
 
 var getAllStocks = function() {
   fetch('/stocks')
-  .then(function (resp) {
+    .then(function (resp) {
     return resp.json();
   })
   .then(function(data) {
     stocks = stocks.concat(data);
+    console.log(stocks);
+    makeStockList();
   });
 };
 
@@ -60,9 +68,9 @@ var getAllStocks = function() {
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    var vaules = getValues();
+    var values = getValues();
     console.log(values);
-    fetch('./models/stocks', {
+    fetch('/stocks', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -75,8 +83,9 @@ var getAllStocks = function() {
       return resp.json();
     })
     .then(function(createdStock) {
-      stock.push(createdStock);
       console.log(stocks);
+      stocks.push(createdStock);
+      // console.log(stocks);
       updateStockList();
     })
     return false;

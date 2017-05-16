@@ -4,20 +4,21 @@ var app = express();
 var _ = require('lodash');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var stockRouter = require('express').Router();
-var PORT = 1775;
+var stockRouter = require('./stocks');
 
 
 mongoose.connect('mongodb://pete:kissmyass2006@ds133311.mlab.com:33311/newlion')
 
-var stock = require('../models/stocks');
 
 app.use(morgan('dev'));
 app.use(express.static('clients'));
-app.use(bodyParser.urlencoded({extend: true}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//this is called mounting. when a request comes in for
+// /Stock, we want to use this router.
 app.use('/stocks', stockRouter);
+
 
 app.use(function(err, req, res, next) {
   if(err) {
@@ -25,7 +26,4 @@ app.use(function(err, req, res, next) {
   }
 })
 
-
-app.listen(PORT, function () {
-  console.log(`app listening on port ${PORT}`);
-});
+app.listen(3000);
