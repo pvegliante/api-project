@@ -13,7 +13,7 @@ stockRouter.get('/', function(req, res) {
   });
 });
 
-stockRouter.get('/:id', function(req, res) {
+stockRouter.get('/:', function(req, res) {
     var stock = req.stock;
     res.json(stock || {});
 });

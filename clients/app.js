@@ -1,7 +1,7 @@
 var stockTemplate = '<h2><%= name %></h2>' +
-'<h3><%= total %></h3>'+
-'<h5><%= value %></h5>'+
-'<h5><%= change %></h5>';
+'<h3>Total:<%= total %></h3>'+
+'<h3>Value:<%= value %></h3>'+
+'<h3>Change:<%= change %></h3>';
 
 var stocks = [];
 

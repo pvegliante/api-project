@@ -11,6 +11,7 @@
     <title>Stock Market</title>
 </head>
 
+
 <body>
 
     <main>
@@ -25,33 +26,32 @@
 
         <form name="stocks">
             <div class="textbox">
-              <label>Stock Name</label>
-                <input type="text" name="stock-name" required>
+                <label>Stock Name</label>
+                <input class="name_line" type="text" name="stock-name" required>
                 <span class="highlight"></span>
             </div>
 
             <div class="textbox">
-              <label>Stock Value</label>
-                <input type="number" name="stock-value" required>
+                <label>Stock Value</label>
+                <input class="value_line" type="number" name="stock-value" required>
                 <span class="highlight"></span>
             </div>
 
             <div class="textbox">
-              <label>Stock Total</label>
-                <input type="number" name="stock-total" required>
+                <label>Stock Total</label>
+                <input class="stock_line" type="number" name="stock-total" required>
                 <span class="highlight"></span>
             </div>
 
             <div class="changebox">
-                <H2><p class="letters">DID STOCK CHANGE</p></H2>
-                <select class="up_down" name="select">
-        <option value="YES">YES</option>
-        <option value="NO">NO</option>
-      </select>
-    </div>
+                <div class="lineup">
+                    <H2>DID STOCK CHANGE</H2>
+                    <select class="up_down" name="select"><option value="YES">YES</option><option value="NO">NO</option>
+                </select></div>
                 <div class="change">AMOUNT CHANGED<input type="number" name="stock-change"></div>
+            </div>
 
-            <div class="button"><button>Submit</button></div>
+            <div class="button"><button class="touchme">Submit</button></div>
 
         </form>
 
@@ -59,6 +59,8 @@
             <ul class="stock-list"></ul>
         </div>
     </main>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
     <script src="app.js"></script>
